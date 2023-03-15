@@ -19,7 +19,7 @@ PAdptArray CreateAdptArray(COPY_FUNC cf, DEL_FUNC df, PRINT_FUNC pf)
     if (pa == NULL)
     {
         perror("Error allocating PAdptArray memory.\n");
-        return FAIL;
+        return NULL;
     }
     pa->num_of_elements = 0;
     pa->arr_cap = 1;
@@ -28,7 +28,7 @@ PAdptArray CreateAdptArray(COPY_FUNC cf, DEL_FUNC df, PRINT_FUNC pf)
     if (pa->PElemArr == NULL)
     {
         perror("Error allocating PElemArr memory.\n");
-        return FAIL;
+        return NULL;
     }
     pa->copy_func = cf;
     pa->del_func = df;
@@ -111,12 +111,12 @@ PElement GetAdptArrayAt(PAdptArray pa, int indx)
     if (indx < 0)
     {
         perror("Index must be a positive.\n");
-        return FAIL;
+        return NULL;
     }
     if (indx >= pa->arr_cap)
     {
         perror("Index out of range.\n");
-        return FAIL;
+        return NULL;
     }
     if (pa->PElemArr[indx])
     {
