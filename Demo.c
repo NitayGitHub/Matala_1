@@ -14,13 +14,14 @@
 #include <assert.h>
 
 int main() {
-
 	pbook b1 = creat_book("harry Potter",12345) ;
 	pbook b2= creat_book("C intro", 45678) ;
 	PAdptArray mybooks = CreateAdptArray(copy_book,delete_book,print_book);
 	SetAdptArrayAt(mybooks,3,b1);
 	SetAdptArrayAt(mybooks,5,b2);
+	
 	printf("the size is %d\n",GetAdptArraySize(mybooks));  //should print 6
+	
 	pbook b = GetAdptArrayAt(mybooks,4); // should return null;
 	assert(b==NULL); // doesn't fail
 	b = GetAdptArrayAt(mybooks,3);
@@ -35,7 +36,7 @@ int main() {
 	printf("the size is %d\n",GetAdptArraySize(HP_caracters)); // prints 9
 	PrintDB(HP_caracters); // prints:
 	//first name: Harry last name: Potter id: 934
-        //first name: Ron last name: Weasley id: 789
+    //first name: Ron last name: Weasley id: 789
 	
 	DeleteAdptArray(mybooks);
 	DeleteAdptArray(HP_caracters);
