@@ -18,7 +18,6 @@ PAdptArray CreateAdptArray(COPY_FUNC cf, DEL_FUNC df, PRINT_FUNC pf)
     PAdptArray pa = (PAdptArray)malloc(sizeof(AdptArr));
     if (pa == NULL)
     {
-        perror("Error allocating PAdptArray memory.\n");
         return NULL;
     }
     pa->num_of_elements = 0;
@@ -27,7 +26,6 @@ PAdptArray CreateAdptArray(COPY_FUNC cf, DEL_FUNC df, PRINT_FUNC pf)
     pa->PElemArr[0] = NULL;
     if (pa->PElemArr == NULL)
     {
-        perror("Error allocating PElemArr memory.\n");
         return NULL;
     }
     pa->copy_func = cf;
@@ -40,7 +38,6 @@ void DeleteAdptArray(PAdptArray pa)
 {
     if (pa == NULL)
     {
-        perror("PAdptArray is NULL. No action was made.\n");
         return;
     }
     PElement curr;
@@ -61,12 +58,10 @@ Result SetAdptArrayAt(PAdptArray pa, int indx, PElement val)
 {
     if (pa == NULL)
     {
-        perror("PAdptArray is NULL. Please create an array first.\n");
         return FAIL;
     }
     if (indx < 0)
     {
-        perror("Index must be a positive.\n");
         return FAIL;
     }
     if (indx >= pa->arr_cap)
@@ -76,7 +71,6 @@ Result SetAdptArrayAt(PAdptArray pa, int indx, PElement val)
         pa->PElemArr = (PElement *)realloc(pa->PElemArr, pa->arr_cap * sizeof(PElement));
         if (pa->PElemArr == NULL)
         {
-            perror("Couldn't realloc PElemArr memory.\n");
             return FAIL;
         }
         for(int i = pre_cap; i < pa->arr_cap; i++)
@@ -94,7 +88,6 @@ Result SetAdptArrayAt(PAdptArray pa, int indx, PElement val)
     pa->PElemArr[indx] = pa->copy_func(val);
     if (pa->PElemArr[indx] == NULL)
     {
-        perror("Couldn't copy the value.\n");
         return FAIL;
     }
     pa->num_of_elements++;
@@ -105,17 +98,14 @@ PElement GetAdptArrayAt(PAdptArray pa, int indx)
 {
     if (pa == NULL)
     {
-        perror("PAdptArray is NULL. Please create an array first.\n");
         return NULL;
     }
     if (indx < 0)
     {
-        perror("Index must be a positive.\n");
         return NULL;
     }
     if (indx >= pa->arr_cap)
     {
-        perror("Index out of range.\n");
         return NULL;
     }
     if (pa->PElemArr[indx])
@@ -129,7 +119,6 @@ int GetAdptArraySize(PAdptArray pa)
 {
     if (pa == NULL)
     {
-        perror("PAdptArray is NULL. Please create an array first.\n");
         return -1;
     }
     return pa->arr_cap;
@@ -139,7 +128,6 @@ void PrintDB(PAdptArray pa)
 {
     if (pa == NULL)
     {
-        perror("PAdptArray is NULL and has no elements.\n");
         return;
     }
     PElement curr;
